@@ -1,8 +1,11 @@
-name: Atualizar Lista
+name: Atualizar Lista M3U
 on:
   schedule:
-    - cron: '0 */6 * * *'  # ⏱️ de 6 em 6 horas — pode mudar!
+    - cron: '0 */6 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write  # 🔓 Permite gravar no repositório
 
 jobs:
   rodar:
@@ -10,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - run: pip install -r requirements.txt
+      - run: pip install requests
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python app.py
