@@ -1,0 +1,16 @@
+name: Atualizar Lista
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # ⏱️ de 6 em 6 horas — pode mudar!
+  workflow_dispatch:
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - run: pip install -r requirements.txt
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python app.py
